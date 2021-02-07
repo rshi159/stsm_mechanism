@@ -1,0 +1,20 @@
+% takes input of physical properties of the continuum limb and 
+% returns matricies of housing. housing_vec is an array of
+% vecotrs normal to the spine that denote the direction of the 
+% housing holes. size = (row = 3, col = h_num).
+function [spine_plot, housing] = geometric(h_rad,h_dist,
+    h_holes,housing_vec, h_num, angles, dampening)
+    
+%     terminal point of last segment
+    rot_mat = stsm_make_rot_mat(angles);
+    prev_terminal = [0;0;0];
+    housing_centers = [0 0 h_dist];
+    for i=1:h_num
+        if i == 1
+            
+        else
+        end
+        prev_terminal = rot_mat * prev_terminal;
+    end
+    
+end
