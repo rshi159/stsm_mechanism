@@ -1,10 +1,10 @@
 % stsm_sim
 % Description: Graphical simulation of a twisted string driven continuum limb.
 
-% Updated: 07 FEB 2021
+% Updated: 05 FEB 2021
 % By: Robert Shi rs36@princeton.edu
 
-clc;clear all;close all;
+clc;clear;close all;
 
 %set parameters. vector order starts with driving spacer -> end/anchor spacer.
 s_num = 3; %number of spacers including spacers on the ends
@@ -34,7 +34,7 @@ if plot
     plot3(spine_plot(1,:),spine_plot(2,:),spine_plot(3,:));
     hold(ax,'on');
     for i = 1:h_num+1
-       plot3(stsm_plot_coords(1,:,i),stsm_plot_coords(2,:,i),stsm_plot_coords(3,:,i)); 
+       plot3(reshape(stsm_plot_coords(i,1,:),stsm_plot_coords(i,2,:),stsm_plot_coords(i,3,:)); 
     end
     axis equal;
     grid on;
