@@ -14,7 +14,7 @@ s_thick = 2.5; %spacer thickness
 str_length_rest = 20; %num_spacers - 1 length array. length of string 
     %between spacers when mechanism is at rest.
 h_dist = 50; %distance between housing
-h_num = 3; % number of housings = number of "links" or segments.
+h_num = 7; % number of housings = number of "links" or segments.
 h_radius = 25; % perpendicular distance from center of housing to spine.
 h_holes = 8; % numbrer of throughholes per housing. Same as number of sTSMs per segment.
 
@@ -25,9 +25,17 @@ angles = [angle_x angle_y angle_z];
 % stsm_make_rot_mat(angles)
 offset = 0;
 housing_vec = housing_structure(h_holes, h_radius, h_dist, offset);
-[spine_plot, housing_centers] = stsm_geometric(h_radius,h_dist, h_holes,housing_vec, h_num, angles, 0);
-    
-figure(1)
-plot3(spine_plot(1,:),spine_plot(2,:),spine_plot(3,:));
-% axis equal;
-grid on;
+[spine_plot, housing_centers, rot_vec] = stsm_geometric(h_radius,h_dist, h_holes,housing_vec, h_num, angles, 0);
+[lengths, stsm_plot_coords] = stsm_lengths(spine_plot, h_num, h_holes);
+plot = true;
+if plot
+    figure(1)
+    ax=gca;
+    plot3(spine_plot(1,:),spine_plot(2,:),spine_plot(3,:));
+    hold(ax,'on');
+    for i = 1:h_num+1
+       plot3(stsm_plot_coords(i,1,:),stsm_plot_coords(i,2,:),stsm_plot_coords(i,3,:)); 
+    end
+    axis equal;
+    grid on;
+end
