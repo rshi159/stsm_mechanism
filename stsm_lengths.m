@@ -12,8 +12,9 @@ function [lengths, stsm_plot_coords] = stsm_lengths(spine_plot, h_num, h_holes)
     % index offset of hole from starting index of segment.
     index_offset = hole_idx * 2 -1;
     stsm_plot_coords = zeros(3, h_num+1,h_holes);
+    % 
     for i=hole_idx
         stsm_plot_coords(:,:,i) = spine_plot(:,seg_idx + index_offset(i));
     end
-    lengths = 0;
+    lengths = vecnorm(diff(stsm_plot_coords,1,2),2,1);
 end

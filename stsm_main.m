@@ -16,7 +16,7 @@ str_length_rest = 20; %num_spacers - 1 length array. length of string
 h_dist = 50; %distance between housing
 h_num = 7; % number of housings = number of "links" or segments.
 h_radius = 25; % perpendicular distance from center of housing to spine.
-h_holes = 8; % numbrer of throughholes per housing. Same as number of sTSMs per segment.
+h_holes = 3; % numbrer of throughholes per housing. Same as number of sTSMs per segment.
 
 angle_x = pi/10; % angles to rotate each segment by.
 angle_y = 0;
@@ -31,10 +31,13 @@ plot = true;
 if plot
     figure(1)
     ax=gca;
-    plot3(spine_plot(1,:),spine_plot(2,:),spine_plot(3,:));
+    plot3(spine_plot(1,:),spine_plot(2,:),spine_plot(3,:), 'linewidth',5);
     hold(ax,'on');
-    for i = 1:h_num+1
-       plot3(stsm_plot_coords(1,:,i),stsm_plot_coords(2,:,i),stsm_plot_coords(3,:,i)); 
+    for i = 1:h_holes
+        plot3(stsm_plot_coords(1,:,i),stsm_plot_coords(2,:,i),stsm_plot_coords(3,:,i), 'linewidth',2); 
+        % plot lengths in the middle of each stsm
+        midpoints = diff(stsm_plot_coords,1,2)/2 + stsm_plot_coords(:,1:end-1,:);
+        text(midpoints(1,:,i),midpoints(2,:,i),midpoints(3,:,i), string(lengths(:,:,i)),'fontsize',16,'horizontalalignment','center');
     end
     axis equal;
     grid on;
