@@ -1,0 +1,9 @@
+% computes the number of rotations in each stsm provided in
+% the matrix of stsm lengths. Returns matrix on success. returns TODO 
+% in case distance is unreachable.
+function [stsm_angles] = stsm_len_to_angles(stsm_lengths,s_num, s_diam, s_thick, str_len)
+%     take entire stsm length, subtract total thickness of spacers,
+%     divide by number of spacers in the stsm segment
+    len_single = (stsm_lengths - s_num * s_thick) / s_num;
+    theta = arccos(len_single^2 - str_len^
+end

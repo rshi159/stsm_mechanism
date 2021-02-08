@@ -23,12 +23,14 @@ angle_y = 0;
 angle_z = 0;
 angles = [angle_x angle_y angle_z];
 % stsm_make_rot_mat(angles)
-offset = 0;
+offset = pi/4;
 housing_vec = housing_structure(h_holes, h_radius, h_dist, offset);
 [spine_plot, housing_centers, rot_vec] = stsm_geometric(h_radius,h_dist, h_holes,housing_vec, h_num, angles, 0);
 [lengths, stsm_plot_coords] = stsm_lengths(spine_plot, h_num, h_holes);
-plot = true;
-if plot
+
+[stsm_angles_total, stsm_angles_segment, stsm_angles_spacer] = stsm_len_to_angles(lengths,s_num, s_diam, s_thick,s_diam/2, str_length_rest);
+plt = true;
+if plt
     figure(1)
     ax=gca;
     plot3(spine_plot(1,:),spine_plot(2,:),spine_plot(3,:), 'linewidth',5);
@@ -42,3 +44,4 @@ if plot
     axis equal;
     grid on;
 end
+disp(">>>DONE<<<");
