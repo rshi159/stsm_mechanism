@@ -21,7 +21,12 @@ function [spine_plot, housing_centers, prev_vec] = stsm_geometric(h_rad,h_dist, 
         prev_terminal = [prev_terminal prev_vec(:,end) + prev_terminal];
         housing_centers = [housing_centers prev_terminal(:,end)];
         temp= repmat(prev_terminal(:,end), 1, len(2)*2);
-        temp(:,idx*2) = rot_mat^i * housing_vec+prev_terminal(:,end);
+        if dampening == 0
+            temp(:,idx*2) = rot_mat^i * housing_vec+prev_terminal(:,end);
+        else
+            rot_mat = stsm_make_rot_mat(angles*dampening^(i-1))
+            temp(:,idx*2) = rot_mat^i * housing_vec+prev_terminal(:,end);
+        end
         spine_plot = [spine_plot temp prev_terminal(:,end)];
     end
 end

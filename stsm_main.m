@@ -24,8 +24,9 @@ angle_z = 0;
 angles = [angle_x angle_y angle_z];
 % stsm_make_rot_mat(angles)
 offset = pi/4;
+dampening = 0;
 housing_vec = housing_structure(h_holes, h_radius, h_dist, offset);
-[spine_plot, housing_centers, rot_vec] = stsm_geometric(h_radius,h_dist, h_holes,housing_vec, h_num, angles, 0);
+[spine_plot, housing_centers, rot_vec] = stsm_geometric(h_radius,h_dist, h_holes,housing_vec, h_num, angles, dampening);
 [lengths, stsm_plot_coords] = stsm_lengths(spine_plot, h_num, h_holes);
 
 [stsm_angles_total, stsm_angles_segment, stsm_angles_spacer] = stsm_len_to_angles(lengths,s_num, s_diam, s_thick,s_diam/2, str_length_rest);
