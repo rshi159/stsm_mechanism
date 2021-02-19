@@ -16,7 +16,7 @@ str_length_rest = 20; %num_spacers - 1 length array. length of string
 h_dist = 50; %distance between housing
 h_num = 7; % number of housings = number of "links" or segments.
 h_radius = 25; % perpendicular distance from center of housing to spine.
-h_holes = 3; % numbrer of throughholes per housing. Same as number of sTSMs per segment.
+h_holes = 4; % numbrer of throughholes per housing. Same as number of sTSMs per segment.
 
 angle_x = pi/10; % angles to rotate each segment by.
 angle_y = 0;

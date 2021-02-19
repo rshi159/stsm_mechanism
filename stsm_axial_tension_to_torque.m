@@ -1,4 +1,4 @@
-function [forces, geometry] = stsm_axial_tension_to_torque(ax_tension, s_diam, s_num,s_len_rest, angle)
+function [forces,force_vec, geometry] = stsm_axial_tension_to_torque(ax_tension, s_diam, s_num,s_len_rest, angle)
     s_rad = s_diam/2;
     s_dist = sqrt(s_len_rest.^2 - 2*s_rad^2.*(1-cos(angle)));
     % from the axial tension and the angle of rotation, we can get the 
@@ -36,5 +36,10 @@ function [forces, geometry] = stsm_axial_tension_to_torque(ax_tension, s_diam, s
     f_tan = geom_to_force .* c_tan;
     forces = [f_total; f_tan; f_ax; f_radial];
     geometry = [ones(size(d))*l; d; c];
+    
+    vec_rad = [-cos(angle); zeros(size(angle)); -sin(angle)];
+    vec_ax = [zeros(size(angle)); -ones(size(angle)); zeros(size(angle))];
+    vec_tan = cross(vec_rad, vec_ax);
+    force_vec = cat(3,vec_tan,vec_ax,vec_rad);
     
 end
